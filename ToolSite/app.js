@@ -51,7 +51,8 @@ app.post('/android/logparse/upload', function(req, res) {
                         res.json({'info':'日志解析失败'})
                         res.end()
                     } else {
-                        res.writeHead(200, {'Content-type':'application/json'})
+                        res.setHeader('Content-type', 'application/json')
+                        // res.writeHead(200, {'Content-type':'application/json'})
                         if (data.indexOf("INSTALL_FAILED_INSUFFICIENT_STORAGE")>-1) {
                             res.json({'info':'INSTALL_FAILED_INSUFFICIENT_STORAGE: 内部存储不足'})
                         } else if (data.indexOf("INSTALL_FAILED_OLDER_SDK")>-1) {
