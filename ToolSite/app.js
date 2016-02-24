@@ -49,6 +49,7 @@ app.post('/android/logparse/upload', function(req, res) {
                     if (err) {
                         res.writeHead(500, {'Content-type':'text/html'})
                         res.write('日志解析失败')
+                        res.end()
                     } else {
                         res.writeHead(200, {'Content-type':'text/html'})
                         if (data.indexOf("INSTALL_FAILED_INSUFFICIENT_STORAGE")>-1) {
@@ -64,6 +65,7 @@ app.post('/android/logparse/upload', function(req, res) {
                         } else {
                             res.write('未发现错误')
                         }
+                        res.end()
                     }
                 });
             });
