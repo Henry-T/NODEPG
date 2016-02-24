@@ -10,6 +10,13 @@ var path = require('path');
 //   // res.send('Hello World!');
 // });
 
+app.get('/', function(req, res){
+    res.writeHead(200, {'Content-type':'text/html'})
+    res.charset = 'utf-8'
+    res.write('tool.lolofinil.com')
+    res.end()
+});
+
 app.get('/android/logparse', function(req, res){
   res.sendfile("index.html");
 });
