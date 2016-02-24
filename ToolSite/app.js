@@ -47,23 +47,23 @@ app.post('/android/logparse/upload', function(req, res) {
             fs.writeFile(new_path, data, function(err) {
                 fs.unlink(old_path, function(err) {
                     if (err) {
-                        res.writeHead(500, {'Content-type':'text/html'})
-                        res.write('日志解析失败')
+                        res.writeHead(500, {'Content-Type':'application/json'})
+                        res.json({'info':'日志解析失败'})
                         res.end()
                     } else {
-                        res.writeHead(200, {'Content-type':'text/html'})
+                        res.writeHead(200, {'Content-type':'application/json'})
                         if (data.indexOf("INSTALL_FAILED_INSUFFICIENT_STORAGE")>-1) {
-                            res.write('INSTALL_FAILED_INSUFFICIENT_STORAGE: 内部存储不足')
+                            res.json({'info':'INSTALL_FAILED_INSUFFICIENT_STORAGE: 内部存储不足'})
                         } else if (data.indexOf("INSTALL_FAILED_OLDER_SDK")>-1) {
-                            res.write('INSTALL_FAILED_OLDER_SDK: apk包的minsdkver大于系统版本')
+                            res.json({'info':'INSTALL_FAILED_OLDER_SDK: apk包的minsdkver大于系统版本'})
                         } else if (data.indexOf("INSTALL_FAILED_USER_RESTRICTED")>-1) {
-                            res.write('INSTALL_FAILED_USER_RESTRICTED: 用户在安全弹框中选择了拒绝')
+                            res.json({'info':'INSTALL_FAILED_USER_RESTRICTED: 用户在安全弹框中选择了拒绝'})
                         } else if (data.indexOf("INSTALL_FAILED_CONTAINER_ERROR")>-1)  {
-                            res.write('INSTALL_FAILED_CONTAINER_ERROR: 请开发者将将AndroidManifest.xml中的installLocaltion改为auto (Unity3D修改Install Localtion设置)')
+                            res.json({'info':'INSTALL_FAILED_CONTAINER_ERROR: 请开发者将将AndroidManifest.xml中的installLocaltion改为auto (Unity3D修改Install Localtion设置)'})
                         } else if (data.indexOf('INSTALL_FAILED_CPU_ABI_INCOMPATIBLE')>-1) {
-                            res.write('INSTALL_FAILED_CPU_ABI_INCOMPATIBLE: CPU架构不兼容')
+                            res.json({'info':'INSTALL_FAILED_CPU_ABI_INCOMPATIBLE: CPU架构不兼容'})
                         } else {
-                            res.write('未发现错误')
+                            res.json({'info':'未发现错误'})
                         }
                         res.end()
                     }
