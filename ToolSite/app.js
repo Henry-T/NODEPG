@@ -62,6 +62,6 @@ app.post('/android/logparse/upload', function(req, res) {
     });
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(10001, function () {
+  console.log('Example app listening on port 10001!');
 });
