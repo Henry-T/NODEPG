@@ -28,6 +28,7 @@ app.get('/android/logparse', function(req, res){
 // })
 
 app.post('/android/logparse/upload', function(req, res) {
+    res.charset = 'utf-8'
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         // `file` is the name of the <input> field of type `file`
@@ -47,20 +48,21 @@ app.post('/android/logparse/upload', function(req, res) {
                 fs.unlink(old_path, function(err) {
                     if (err) {
                         res.writeHead(500, {'Content-type':'text/html'})
-                        res.charset = 'utf-8'
                         res.write('日志解析失败')
-                        res.end()
                     } else {
+                        res.writeHead(200, {'Content-type':'text/html'})
                         if (data.indexOf("INSTALL_FAILED_INSUFFICIENT_STORAGE")>-1) {
-                            res.writeHead(200, {'Content-type':'text/html'})
-                            res.charset = 'utf-8'
-                            res.write('内部存储不足')
-                            res.end()
+                            res.write('INSTALL_FAILED_INSUFFICIENT_STORAGE: 内部存储不足')
+                        } else if (data.indexOf("INSTALL_FAILED_OLDER_SDK")>-1) {
+                            res.write('INSTALL_FAILED_OLDER_SDK: apk包的minsdkver大于系统版本')
+                        } else if (data.indexOf("INSTALL_FAILED_USER_RESTRICTED")>-1) {
+                            res.write('INSTALL_FAILED_USER_RESTRICTED: 用户在安全弹框中选择了拒绝')
+                        } else if (data.indexOf("INSTALL_FAILED_CONTAINER_ERROR")>-1)  {
+                            res.write('INSTALL_FAILED_CONTAINER_ERROR: 请开发者将将AndroidManifest.xml中的installLocaltion改为auto (Unity3D修改Install Localtion设置)')
+                        } else if (data.indexOf('INSTALL_FAILED_CPU_ABI_INCOMPATIBLE')>-1) {
+                            res.write('INSTALL_FAILED_CPU_ABI_INCOMPATIBLE: CPU架构不兼容')
                         } else {
-                            res.writeHead(200, {'Content-type':'text/html'})
-                            res.charset = 'utf-8'
                             res.write('未发现错误')
-                            res.end()
                         }
                     }
                 });
