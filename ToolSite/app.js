@@ -89,7 +89,7 @@ app.post('/httpclient/hysg_build/request', function(req, res) {
         for(var i=0; i<channelAry.length; i++) {
             var channel = channelAry[i];
 
-            var path = "/job/Build_Android/buildWithParameters?GAME=hysg&SVN_BRANCH_DIR="+branch+"&SVN_REVISION=HEAD&DEPENDENCY_CONFIG=GSDKWorkflow='product';QuickRevision='HEAD';GSDKRelease=false;CocosCodebaseRevision='HEAD';AnySDK=false;&PLATFORM_CONFIG=Platform='"+channel+"';&HARDWARE_CONFIG=ControlFramework='key';EnableTouch=false;&I18N_CONFIG=Loc='zh_CN';FakeLoc=false;&PACKAGE_CONFIG=CompileMode='release';EnableUpdate=true;EnableMainUpgrade=true;&DEBUG_CONFIG=ShowFPS=false;EnableLog=false;PayByPlatform=true;PayTest=false;&GAME_CONFIG=AnalyticsReport=true;ShowGuide=true;USE_FINGER_TOUCH=true;SKIP_INTRO=false;";
+            var path = "/job/Build_Android/buildWithParameters?GAME=hysg&SVN_BRANCH_DIR="+branch+"&SVN_REVISION=HEAD&DEPENDENCY_CONFIG=GSDKWorkflow='product';QuickRevision='HEAD';GSDKRelease=false;CocosCodebaseRevision='HEAD';AnySDK=false;&PLATFORM_CONFIG=Platform='"+channel+"';&HARDWARE_CONFIG=ControlFramework='key';EnableTouch=false;&I18N_CONFIG=Loc='zh_CN';FakeLoc=false;&PACKAGE_CONFIG=CompileMode='release';EnableUpdate=true;EnableMainUpgrade=true;&DEBUG_CONFIG=ShowFPS=false;EnableLog=false;PayByPlatform=true;PayTest=false;&GAME_CONFIG=AnalyticsReport=true;ShowGuide=true;UseFingerTouch=true;SkipIntro=false;";
             console.log(path);
 
             var options = {
