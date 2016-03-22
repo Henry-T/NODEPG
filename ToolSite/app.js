@@ -86,6 +86,8 @@ app.post('/httpclient/hysg_build/request', function(req, res) {
         var channels = fields.channels;
         var channelAry = channels.split(",");
 
+        var localCfg = require('./localCfg.json')
+
         for(var i=0; i<channelAry.length; i++) {
             var channel = channelAry[i];
 
@@ -96,7 +98,7 @@ app.post('/httpclient/hysg_build/request', function(req, res) {
                 hostname: 'jenkins.apowo.com',
                 port: 80,
                 path: path,
-                auth: 'test:test',
+                auth: localCfg.aaaaa+":"+localCfg.bbbbb,
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/x-www-form-urlencoded',
