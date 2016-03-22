@@ -121,6 +121,18 @@ app.post('/httpclient/hysg_build/request', function(req, res) {
     });
 });
 
+app.get('/task', function(req, res){
+    // res.sendfile("hysg_build.html");
+    const exec = require('child_process').exec;
+    const child = exec('task list', (error, stdout, stderr)=>{
+        res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
+        // res.write('<head><meta charset="utf-8"/></head>');
+        // res.write('<body>');
+        res.write(stdout);
+        res.end();
+        // res.end('</body>');
+    });
+})
 
 app.listen(10001, function () {
   console.log('Example app listening on port 10001!');
