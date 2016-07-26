@@ -1,0 +1,17 @@
+<script type="text/javascript">
+	if (history.length > 2) {
+		alert("close! history.length:" + history.length);
+	} else {
+		setTimeout(function(){
+			window.location.href="next.html"
+		}, 100);
+	}
+	// 下面这个写法会造成index.html不在历史中
+	//window.onload = function() {
+	//	window.location.href = "next.html"
+	//}
+</script>
+<head><title>AutoCloseOnBack</title></head>
+<body>
+This page will auto close when navigate back from history.<br>
+</body>
